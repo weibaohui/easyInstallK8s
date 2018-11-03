@@ -45,7 +45,7 @@ if [ $? -eq 0 ]; then
 
     echo -e "\033[32m## 生成node节点安装包 =====================================================================\033[0m"
     mkdir -p /tmp/k8s-node-install
-    cp setupconfig.sh install-docker.sh pull-docker.sh install-k8s.sh install-node.sh /tmp/k8s-node-install
+    cp setupconfig.sh install-docker.sh pull-docker.sh install-k8s.sh install-node.sh remove.sh /tmp/k8s-node-install
     cd /tmp
     tar -czf k8s-node-install.tar.gz k8s-node-install
     sudo mv k8s-node-install.tar.gz /root/

@@ -4,6 +4,7 @@
 VERSION=$1
 
 #删除原来安装的版本
+systemctl stop kubelet
 yum remove -y kubelet kubeadm
 rm -rf /etc/kubernetes/
 rm -rf /var/lib/etcd/
