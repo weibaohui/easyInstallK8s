@@ -11,6 +11,6 @@ docker save k8s.gcr.io/pause:3.1 > tar/pause.tar.gz
 docker save quay.io/coreos/flannel:v0.10.0-amd64 > tar/flannel.tar.gz
 docker save k8s.gcr.io/kubernetes-dashboard-amd64:v1.10.0 >tar/kubernetes-dashboard.tar.gz
 docker save k8s.gcr.io/metrics-server-amd64:v0.2.1 >tar/metrics-server.tar.gz
-docker save k8s.gcr.io/addon-resizer:1.8.3 >tar/addon-resizer.tar.gz
+docker save k8s.gcr.io/addon-resizer:1.8.1 >tar/addon-resizer.tar.gz
 #传输到各个节点
 scp -r tar root@10.1.107.111:/root
