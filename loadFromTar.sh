@@ -9,3 +9,4 @@ docker load <tar/kube-proxy.tar.gz
 docker load <tar/kubernetes-dashboard.tar.gz
 docker load <tar/metrics-server.tar.gz
 docker load <tar/addon-resizer.tar.gz
+docker load <tar/pause.tar.gz
