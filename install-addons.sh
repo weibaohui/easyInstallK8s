@@ -21,6 +21,6 @@ sudo kubectl create clusterrolebinding dashboard-admin --clusterrole=cluster-adm
 ADMIN_SECRET=$(sudo kubectl get secrets -n kube-system | grep dashboard-admin | awk '{print $1}')
 DASHBOARD_LOGIN_TOKEN=$(sudo kubectl describe secret -n kube-system ${ADMIN_SECRET} | grep -E '^token' | awk '{print $2}')
 echo ${DASHBOARD_LOGIN_TOKEN} > token.txt
-echo -e "\033[32m 浏览方式: 用firefox 浏览 https://nodes-ip:30001 (要用命令查看pod-dashboard所对应的node节点),跳出不安全提示，然后高级点添加网站到安全例外\033[0m"
+echo -e "\033[32m 浏览方式: https://nodes-ip:30001 (要用命令查看pod-dashboard所对应的node节点),跳出不安全提示，然后高级点添加网站到安全例外\033[0m"
 echo -e "\033[33m 登录token见 安装目录下token.txt \033[0m"
 

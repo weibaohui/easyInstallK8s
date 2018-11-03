@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+
 docker load <tar/etcd.tar.gz
 docker load <tar/kube-controller-manage.tar.gz
 docker load <tar/coredns.tar.gz

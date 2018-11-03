@@ -9,6 +9,7 @@ docker save k8s.gcr.io/coredns:1.2.2 > tar/coredns.tar.gz
 docker save k8s.gcr.io/pause:3.1 > tar/pause.tar.gz
 docker save quay.io/coreos/flannel:v0.10.0-amd64 > tar/flannel.tar.gz
 
+#传输到各个节点
 scp -r tar root@10.1.107.111:/root
 scp -r tar root@10.1.107.112:/root
 scp -r tar root@10.1.107.113:/root
