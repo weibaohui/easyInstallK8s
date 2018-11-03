@@ -8,7 +8,7 @@ echo -e "\033[32m## 初始化k8s所需要环境. ===============================
 /bin/bash setupconfig.sh
 
 echo -e "\033[32m## 安装docker,如果不需要请注释该行,安装新版docker修改下面这句 /bin/bash install-docker.sh ===\033[0m"
-#/bin/bash install-docker.sh new
+/bin/bash install-docker.sh new
 #/bin/bash install-docker.sh
 
 echo -e "\033[32m## 下载kubeadm所需要的镜像. =================================================================\033[0m"
