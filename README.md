@@ -16,4 +16,7 @@ dashboard 浏览方法: 用firefox 浏览 https://master-ip:30001 ,跳出不安�
 
 安装成功后会在/root目录生成 node节点的安装包，scp到node节点解压运行 ./install-node.sh 即可加入集群
 
+traefik访问界面，请先添加hosts
+'nodeip traefik-ui.minikube' > /etc/hosts 
+如果使用rancher，那么请配置自定义域名
 删除请运行 remove.sh
