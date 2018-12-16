@@ -8,7 +8,7 @@ docker pull k8s.gcr.io/kube-proxy:v1.13.1
 docker pull k8s.gcr.io/coredns:1.2.6
 docker pull k8s.gcr.io/pause:3.1
 docker pull k8s.gcr.io/kubernetes-dashboard-amd64:v1.10.0
-docker pull k8s.gcr.io/metrics-server-amd64:v0.2.1
+docker pull k8s.gcr.io/metrics-server-amd64:v0.3.1
 docker pull k8s.gcr.io/addon-resizer:1.8.4
 docker pull quay.io/coreos/flannel:v0.10.0-amd64
 #发送到镜像仓库
@@ -21,7 +21,7 @@ docker tag k8s.gcr.io/coredns:1.2.6 weibh/coredns:1.2.6
 docker tag k8s.gcr.io/pause:3.1 weibh/pause:3.1
 docker tag k8s.gcr.io/kubernetes-dashboard-amd64:v1.10.0 weibh/kubernetes-dashboard-amd64:v1.10.0
 docker tag k8s.gcr.io/metrics-server-amd64:v0.3.1 weibh/metrics-server-amd64:v0.3.1
-docker tag k8s.gcr.io/addon-resizer:1.8.1 weibh/addon-resizer:1.8.1
+docker tag k8s.gcr.io/addon-resizer:1.8.4 weibh/addon-resizer:1.8.4
 docker tag quay.io/coreos/flannel:v0.10.0-amd64 weibh/flannel:v0.10.0-amd64
 
 docker push weibh/etcd:3.2.24
