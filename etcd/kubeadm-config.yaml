@@ -1,0 +1,17 @@
+apiVersion: kubeadm.k8s.io/v1beta1
+kind: ClusterConfiguration
+kubernetesVersion: stable
+imageRepository: registry.cn-hangzhou.aliyuncs.com/google_containers
+apiServer:
+  certSANs:
+    - "api.me"
+controlPlaneEndpoint: "api.me:6433"
+etcd:
+  external:
+    endpoints:
+      - https://192.168.110.191:2379
+      - https://192.168.110.192:2379
+      - https://192.168.110.193:2379
+    caFile: /etc/kubernetes/pki/etcd/ca.crt
+    certFile: /etc/kubernetes/pki/apiserver-etcd-client.crt
+    keyFile: /etc/kubernetes/pki/apiserver-etcd-client.key

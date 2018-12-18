@@ -31,7 +31,7 @@ mkdir -p /tmp/${HOST0}/ /tmp/${HOST1}/ /tmp/${HOST2}/
 
 ETCDHOSTS=(${HOST2} ${HOST1} ${HOST0})
 #改成节点的主机名 //todo
-NAMES=("master1" "master3" "master3")
+NAMES=("master3" "master2" "master1")
 
 for i in "${!ETCDHOSTS[@]}"; do
 HOST=${ETCDHOSTS[$i]}
