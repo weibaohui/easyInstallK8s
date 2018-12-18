@@ -3,6 +3,8 @@
 kubeadm init --config kubeadm-config.yaml
 
 
+#copy到其他节点，执行
+#sudo kubeadm join 192.168.0.200:6443 --token j04n3m.octy8zely83cy2ts --discovery-token-ca-cert-hash sha256:84938d2a22203a8e56a787ec0c6ddad7bc7dbd52ebabc62fd5f4dbea72b14d1f --experimental-control-plane
 
 USER=root # customizable
 CONTROL_PLANE_IPS="192.168.110.192 192.168.110.193"
