@@ -2,15 +2,16 @@
 #1 https://kubernetes.io/docs/setup/independent/setup-ha-etcd-with-kubeadm/
 #2 https://kubernetes.io/docs/setup/independent/high-availability/#external-etcd-nodes
 
-cat << EOF > /etc/systemd/system/kubelet.service.d/20-etcd-service-manager.conf
+
+#/etc/systemd/system/kubelet.service.d/20-etcd-service-manager.conf
+cat << EOF > /tmp/20-etcd-service-manager.conf
 [Service]
 ExecStart=
 ExecStart=/usr/bin/kubelet --address=127.0.0.1 --pod-manifest-path=/etc/kubernetes/manifests --allow-privileged=true
 Restart=always
 EOF
 
-systemctl daemon-reload
-systemctl restart kubelet
+
 
 
 #host0为主节点，后面的操作都在host0上执行
@@ -25,8 +26,9 @@ kubeadm init phase certs etcd-ca
 mkdir -p /tmp/${HOST0}/ /tmp/${HOST1}/ /tmp/${HOST2}/
 
 
+
 ETCDHOSTS=(${HOST2} ${HOST1} ${HOST0})
-NAMES=("infra0" "infra1" "infra2")
+NAMES=("master1" "master3" "master3")
 
 for i in "${!ETCDHOSTS[@]}"; do
 HOST=${ETCDHOSTS[$i]}
@@ -56,16 +58,31 @@ kubeadm init phase certs etcd-server --config=/tmp/${HOST}/kubeadm-etcd-cfg.yaml
 kubeadm init phase certs etcd-peer --config=/tmp/${HOST}/kubeadm-etcd-cfg.yaml
 kubeadm init phase certs etcd-healthcheck-client --config=/tmp/${HOST}/kubeadm-etcd-cfg.yaml
 kubeadm init phase certs apiserver-etcd-client --config=/tmp/${HOST}/kubeadm-etcd-cfg.yaml
-cp -R /etc/kubernetes/pki /tmp/${HOST}/
-if [[ "${HOST}" != "${ETCDHOSTS[0]}" ]]; then
+if [[ "${HOST}" != "${HOST0}" ]]; then
     echo "copy to  ${HOST}'s /etc/kubernetes/"
-    scp -r /tmp/${HOST}/* root@${HOST}:/etc/kubernetes/
+    cp -R /etc/kubernetes/pki /tmp/${HOST}/
+    #清理
     find /etc/kubernetes/pki -not -name ca.crt -not -name ca.key -type f -delete
+    find /tmp/${HOST} -name ca.key -type f -delete
+
+    #分别在每一台etcd上执行
+    ssh -p 22  root@${HOST} "mkdir -p /etc/kubernetes/"
+    scp -r /tmp/${HOST}/*  root@${HOST}:/etc/kubernetes/
+
+    #将etcd纳管到kubelet
+    scp -r /tmp/20-etcd-service-manager.conf  root@${HOST}:/etc/systemd/system/kubelet.service.d/20-etcd-service-manager.conf
+    ssh -p 22  root@${HOST} "systemctl daemon-reload"
+    ssh -p 22  root@${HOST} "systemctl restart kubelet"
+    ssh -p 22  root@${HOST} "kubeadm init phase etcd local --config=/etc/kubernetes/kubeadm-etcd-cfg.yaml"
 
 fi
-if [[ "${HOST}" == "${ETCDHOSTS[0]}" ]]; then
-    echo "copy to  ${HOST}'s /etc/kubernetes/"
-    cp -rf /tmp/192.168.110.191/* /etc/kubernetes/
+
+if [[ "${HOST}" == "${HOST0}" ]]; then
+#在本机上执行
+cp -f /tmp/20-etcd-service-manager.conf /etc/systemd/system/kubelet.service.d/20-etcd-service-manager.conf
+systemctl daemon-reload
+systemctl restart kubelet
+kubeadm init phase etcd local --config=/tmp/${HOST}/kubeadm-etcd-cfg.yaml
 fi
 
 
@@ -74,5 +91,4 @@ done
 
 
 
-#分别在每一台etcd上执行
-kubeadm init phase etcd local --config=/etc/kubernetes/kubeadm-etcd-cfg.yaml
+
