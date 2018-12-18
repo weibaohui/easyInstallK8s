@@ -4,8 +4,8 @@ kubernetesVersion: stable
 imageRepository: registry.cn-hangzhou.aliyuncs.com/google_containers
 apiServer:
   certSANs:
-    - "api.me"
-controlPlaneEndpoint: "api.me:6433"
+    - "api.k8s.oauthd.com"
+controlPlaneEndpoint: "api.k8s.oauthd.com:6443"
 etcd:
   external:
     endpoints:
