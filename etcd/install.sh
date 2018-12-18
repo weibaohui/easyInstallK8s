@@ -15,9 +15,11 @@ EOF
 
 
 #host0为主节点，后面的操作都在host0上执行
+#配置三个etcd节点ip //todo
 export HOST0=192.168.110.191
 export HOST1=192.168.110.192
 export HOST2=192.168.110.193
+
 
 #生成ca证书
 kubeadm init phase certs etcd-ca
@@ -28,6 +30,7 @@ mkdir -p /tmp/${HOST0}/ /tmp/${HOST1}/ /tmp/${HOST2}/
 
 
 ETCDHOSTS=(${HOST2} ${HOST1} ${HOST0})
+#改成节点的主机名 //todo
 NAMES=("master1" "master3" "master3")
 
 for i in "${!ETCDHOSTS[@]}"; do
