@@ -20,3 +20,7 @@ traefik访问界面，请先添加hosts
 'nodeip traefik-ui.minikube' > /etc/hosts 
 如果使用rancher，那么请配置自定义域名
 删除请运行 remove.sh
+
+#国内安装镜像
+kubeadm init 
+--image-repository registry.aliyuncs.com/google_containers
