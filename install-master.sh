@@ -2,7 +2,7 @@
 # 安装master
 # cd 到目录中运行 ./install-master.sh 就可以
 # 多网卡请输入网卡IP  例如 ./install-master.sh 192.168.1.1 
-K8sVersion="1.12.2"
+K8sVersion="1.14.0"
 
 echo -e "\033[32m## 初始化k8s所需要环境. =====================================================================\033[0m"
 /bin/bash setupconfig.sh
