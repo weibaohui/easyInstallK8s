@@ -10,7 +10,7 @@ if [ "$1" == "new" ]; then
 	sudo yum install -y yum-utils  device-mapper-persistent-data  lvm2
 	sudo yum-config-manager  --add-repo  https://download.docker.com/linux/centos/docker-ce.repo
 	sudo yum clean all
-	sudo yum -y install docker-ce-18.09.4.ce
+	sudo yum -y install docker-ce-18.06.2.ce
 	sudo mkdir -p /etc/docker/
 else
 	sudo yum -y install docker
