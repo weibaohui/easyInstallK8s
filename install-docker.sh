@@ -17,12 +17,14 @@ else
 fi
 
 sudo mkdir -p /etc/docker/
+#私有仓库
+#"insecure-registries": ["192.168.1.100","IP:PORT"],
 sudo cat > /etc/docker/daemon.json <<EOF
 {
   "registry-mirrors": ["http://hub-mirror.c.163.com","https://f9pifyym.mirror.aliyuncs.com","https://registry.docker-cn.com"],
   "max-concurrent-downloads": 3,
   "max-concurrent-uploads": 5,
-  #"insecure-registries": ["192.168.1.100","IP:PORT"],
+
   "log-driver": "json-file",
   "log-opts": {
     "max-size": "100m",
