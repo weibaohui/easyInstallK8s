@@ -28,6 +28,10 @@ sudo systemctl enable kubelet
 sudo cat <<EOF >  /etc/sysctl.d/k8s.conf
 net.bridge.bridge-nf-call-ip6tables = 1
 net.bridge.bridge-nf-call-iptables = 1
+net.ipv4.ip_forward=1
+net.ipv4.neigh.default.gc_thresh1=4096
+net.ipv4.neigh.default.gc_thresh2=6144
+net.ipv4.neigh.default.gc_thresh3=8192
 EOF
 
 DOCKER_CGROUPS=$(docker info | grep 'Cgroup' | cut -d' ' -f3)
